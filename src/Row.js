@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import axios from './axios';
 import YouTube from 'react-youtube';
-const movieTrailer = require( 'movie-trailer' )
+const movieTrailer = require('movie-trailer');
 
 const baseurl = "https://image.tmdb.org/t/p/original";
 
@@ -18,12 +18,12 @@ function Row(props) {
     const [YTUrl,setUrl] = useState("");
 
     function clickfunc(movie){
+        console.log(movie.name);
         if(YTUrl){
             setUrl("");
         }else{
             movieTrailer("money heist")
                 .then(url => {
-                    console.log("jij");
                     const vid = new URLSearchParams(new URL(url).search);
                     setUrl(vid.get('v'));
                 })

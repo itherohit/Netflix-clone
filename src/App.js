@@ -1,36 +1,38 @@
 import React from 'react';
 import './App.css';
-import Row from './Row.js';
-import request from './request.js';
-import Banner from "./Banner";
 import Nav from './Nav';
 import Home from './Home';
+import Signin from './Signin';
+import Signup from './Signup';
+import Browser from './Browser';
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
 
 function App() {
+  const user = useSelector(selectUser);
+
   return (
-    <div className="App">
-      <Nav />
-      <Router>
+    <Router>
+      <div className="App">
+        <Nav />
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/browse">
-          <Banner />
-          <Row title="Netflix Originals" fetchUrl={request.fetchNetflixOriginals} isLarge/>
-          <Row title="Trending Now" fetchUrl={request.fetchTrending}/>
-          <Row title="Top Rated" fetchUrl={request.fetchTopRated}/>
-          <Row title="Action Movies" fetchUrl={request.fetchActianMovies}/>
-          <Row title="Comedy Movies" fetchUrl={request.fetchComedyMovies}/>
-          <Row title="Horror Movies" fetchUrl={request.fetchHorrorMovies}/>
-          <Row title="Romance Movies" fetchUrl={request.fetchRomanceMovies}/>
-          <Row title="Documentaries" fetchUrl={request.fetchDocumentaries}/>
+        <Route exact path="/signin">
+          <Signin />
         </Route>
-      </Router>
-    </div>
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/browse">
+          <Browser />
+        </Route>
+      </div>
+    </Router>
   );
 }
 

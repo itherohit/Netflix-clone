@@ -14,11 +14,35 @@ body {
   justify-content: space-between;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 5;
   width: 100%;
+  max-width: 100%;
   height: 70px;
-  padding: 0 30px;
   transition: all 500ms ease-in;
+}
+
+.navbar__img {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.navbar__btn {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top: 15px;
+  margin-right: 20px;
+  padding: 10px 15px;
+  background-color: rgb(192, 0, 0);
+  border: none !important;
+  cursor: pointer;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none !important;
 }
 
 .nav--bg {
@@ -281,13 +305,13 @@ video {
 .open {
   height: max-content;
   max-height: 1200px;
-  transition: 1s all;
+  transition: 1s all ease-in;
 }
 
 .closed {
   height: 0;
   overflow: hidden;
-  transition: 1s all;
+  transition: 1s all ease-in;
 }
 
 .obtn {
@@ -299,6 +323,47 @@ video {
 .cbtn {
   transition: 500ms all;
   font-size: 2rem;
+}
+
+.signin {
+  width: 350px;
+  height: 70vh;
+  padding: 40px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.signin__form {
+  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.signin__input {
+  width: 100%;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(77, 77, 77);
+}
+
+.signup__click {
+  cursor: pointer;
+  color: white;
+  border-bottom: none;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.signin__form__member {
+  display: flex;
+  color: gray;
 }
 
 @media only screen and (max-width: 800px) {
@@ -383,5 +448,17 @@ video {
   }
   .Questions h1 {
     font-size: 2rem;
+  }
+  .signin {
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+  }
+  .signin__form {
+    color: white;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
   }
 }

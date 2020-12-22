@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Nav() {
     const [scroll,setScroll] = useState(false);
@@ -15,11 +16,17 @@ function Nav() {
 
     return (
         <div className={`navbar ${scroll && "nav--bg"}`}>
-            <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" 
-            width="100px"
-            alt="Netflix"
-            />
+            <Link to="/">
+                <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" 
+                width="100px"
+                alt="Netflix"
+                className="navbar__img"
+                />
+            </Link>
+            <Link to="/signin" style={{ textDecoration: 'none' }}>
+                <button className="navbar__btn">Sign In</button>
+            </Link>
         </div>
     )
 }

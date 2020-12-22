@@ -1,6 +1,8 @@
 import React from 'react';
 import Homecard from './Homecard';
 import QuestionCard from "./QuestionCard";
+import {Link} from 'react-router-dom'
+
 const questions = require("./question.json");
 
 function Home() {
@@ -16,7 +18,9 @@ function Home() {
                         <p>Ready to watch? Enter your email to create or restart your membership.</p>
                         <div className="getStarted_input">
                             <input type="email" id="email" className="getStarted__email" placeholder="Email Address"/>
-                            <button className="getStarted__button">GET STARTED ></button>
+                            <Link to="/signup" className="getStarted__button">
+                                <span>{"GET STARTED >"}</span>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -45,6 +49,13 @@ function Home() {
                 {questions.map(question => {
                     return <QuestionCard q={question.q} ans={question.ans}/>
                 })}
+            </div>
+            <div className="getStarted">
+                <p>Ready to watch? Enter your email to create or restart your membership.</p>
+                <div className="getStarted_input">
+                    <input type="email" id="email" className="getStarted__email" placeholder="Email Address"/>
+                    <button className="getStarted__button">{"GET STARTED >"}</button>
+                </div>
             </div>
             
         </div>
