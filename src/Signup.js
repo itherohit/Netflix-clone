@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Button } from '@material-ui/core';
+import {login} from './features/userSlice';
 import {db,auth} from './firebase';
 
 function Signup() {
@@ -10,6 +12,7 @@ function Signup() {
     const [email,setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [error, setError] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -32,13 +35,19 @@ function Signup() {
                 setName('');
                 setEmail('');
                 setPass('');
-                db.collection("users").doc(user.user.uid).set({
-                    name: name,
-                    email: email
+                user.user.updateProfile({
+                    displayname: name
+                })
+                .then(() => {
+                    dispatch(login({
+                        email: user.user.email,
+                        uid: user.user.uid,
+                        displayname: name
+                    }))
                 });
             })
             .catch(err => {
-                console.log(err);
+                alert(err.message);
             })
     }
 

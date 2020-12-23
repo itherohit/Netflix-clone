@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
+import { useDispatch } from "react-redux";
+import {logout} from './features/userSlice'
 
 function Nav() {
+
+    const user = useSelector(selectUser);
+    const dispatch = useDispatch();
+
     const [scroll,setScroll] = useState(false);
     useEffect(() => {
         window.addEventListener("scroll", ()=>{
@@ -24,9 +32,14 @@ function Nav() {
                 className="navbar__img"
                 />
             </Link>
-            <Link to="/signin" style={{ textDecoration: 'none' }}>
-                <button className="navbar__btn">Sign In</button>
-            </Link>
+            {!user ? <Link to="/signin" style={{ textDecoration: 'none' }}>
+                        <button className="navbar__btn">Sign In</button>
+                    </Link> :
+            <Link to="/signin" style={{ textDecoration: 'none' }} onClick={() => {
+                dispatch(logout());
+            }}>
+                <button className="navbar__btn">Sign Out</button>
+            </Link>}
         </div>
     )
 }

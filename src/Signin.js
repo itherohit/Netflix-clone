@@ -3,12 +3,16 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
 import {db,auth} from './firebase';
+import {login} from './features/userSlice';
+import { useDispatch } from "react-redux";
 
 function Signin() {
     let history = useHistory();
     const [email,setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [error, setError] = useState(false);
+    const dispatch = useDispatch();
+
 
     useEffect(()=>{
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -28,11 +32,16 @@ function Signin() {
 
         auth.signInWithEmailAndPassword(email, pass)
             .then((user) => {
-                console.log(user);
-                console.log("Signed in");
+                setEmail('');
+                setPass('');
+                dispatch(login({
+                    email: user.user.email,
+                    uid: user.user.uid,
+                    displayname: user.displayname
+                }))
             })
             .catch((error) => {
-                console.log(error);
+                alert(error.message);
             });
     }
 
