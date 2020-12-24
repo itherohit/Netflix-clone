@@ -9,9 +9,7 @@ function QuestionCard(props) {
     }
     return (
         <div>
-            <button className="question__card" onClick={()=>{
-                qclick();
-            }}>
+            <button className="question__card" onClick={()=>{qclick();}}>
                 <p>{props.q}</p>
                 <p className={`${qstate === true ? "obtn" : "cbtn"}`}>+</p>
             </button>

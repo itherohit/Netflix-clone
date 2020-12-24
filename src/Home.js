@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Homecard from './Homecard';
 import QuestionCard from "./QuestionCard";
 import {Link} from 'react-router-dom'
@@ -6,6 +6,11 @@ import {Link} from 'react-router-dom'
 const questions = require("./question.json");
 
 function Home() {
+    const [email,setEmail] = useState("");
+
+    function inputemail(e){
+        setEmail(e.target.value);
+    }
     return (
         <div>
             
@@ -17,8 +22,8 @@ function Home() {
                     <div className="getStarted">
                         <p>Ready to watch? Enter your email to create or restart your membership.</p>
                         <div className="getStarted_input">
-                            <input type="email" id="email" className="getStarted__email" placeholder="Email Address"/>
-                            <Link to="/signup" className="getStarted__button">
+                            <input type="email" onChange={e=>{inputemail(e)}} id="email" className="getStarted__email" placeholder="Email Address"/>
+                            <Link to={`/signup?emailId=${email}`} className="getStarted__button">
                                 <span>{"GET STARTED >"}</span>
                             </Link>
                         </div>
@@ -47,14 +52,20 @@ function Home() {
             <div className="Questions">
                 <h1>Frequently Asked Questions</h1>
                 {questions.map(question => {
-                    return <QuestionCard q={question.q} ans={question.ans}/>
+                    return <QuestionCard key={question.id} q={question.q} ans={question.ans}/>
                 })}
             </div>
-            <div className="getStarted">
-                <p>Ready to watch? Enter your email to create or restart your membership.</p>
-                <div className="getStarted_input">
-                    <input type="email" id="email" className="getStarted__email" placeholder="Email Address"/>
-                    <button className="getStarted__button">{"GET STARTED >"}</button>
+            <div className="home__footer">
+                <div className="home__content">
+                    <div className="getStarted">
+                        <p>Ready to watch? Enter your email to create or restart your membership.</p>
+                        <div className="getStarted_input">
+                            <input type="email" id="email" onChange={e=>{inputemail(e)}} className="getStarted__email" placeholder="Email Address"/>
+                            <Link to={`/signup?emailId=${email}`} className="getStarted__button">
+                                <span>{"GET STARTED >"}</span>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
             

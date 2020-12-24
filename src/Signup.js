@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
-import { useHistory } from "react-router-dom";
+import { useHistory,useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Button } from '@material-ui/core';
 import {login} from './features/userSlice';
-import {db,auth} from './firebase';
+import {auth} from './firebase';
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 function Signup() {
     let history = useHistory();
@@ -13,7 +17,12 @@ function Signup() {
     const [pass, setPass] = useState('');
     const [error, setError] = useState(false);
     const dispatch = useDispatch();
+    let query = useQuery();
 
+    useEffect(()=>{
+        setEmail(query.get("emailId"));
+    },[]);
+    
     useEffect(()=>{
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(name.length>2 && pass.length>3 && re.test(email)){

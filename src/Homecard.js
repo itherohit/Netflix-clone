@@ -15,7 +15,7 @@ function Homecard(props) {
                     />
                     {props.videoUrl && 
                     <div className={`HomeCard__content__video ${props.bottomCard && "HomeCard__content__video__btm"}`}>
-                        <video class="our-story-card-video" autoPlay loop muted>
+                        <video className="our-story-card-video" autoPlay loop muted>
                             <source src={props.videoUrl} type="video/mp4" />
                         </video>
                     </div> }

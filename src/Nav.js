@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import { useDispatch } from "react-redux";
 import {logout} from './features/userSlice'
+import {auth} from './firebase';
 
 function Nav() {
 
@@ -37,6 +38,7 @@ function Nav() {
                     </Link> :
             <Link to="/signin" style={{ textDecoration: 'none' }} onClick={() => {
                 dispatch(logout());
+                auth.signOut();
             }}>
                 <button className="navbar__btn">Sign Out</button>
             </Link>}

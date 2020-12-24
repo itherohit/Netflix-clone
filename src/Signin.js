@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
-import {db,auth} from './firebase';
+import {auth} from './firebase';
 import {login} from './features/userSlice';
 import { useDispatch } from "react-redux";
 

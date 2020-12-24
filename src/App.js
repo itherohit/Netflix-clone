@@ -20,7 +20,7 @@ import {
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  
+
   useEffect(()=>{
     auth.onAuthStateChanged(userauth =>{
       if(userauth){
@@ -40,9 +40,11 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={!user ? Home : Browse}/>
-          {!user && <Route exact path="/signin" component={Signin}/> }
-          {!user && <Route exact path="/signup" component={Signup}/> }
-          <Route path="/" component={!user ? Home : Browse} />
+          {!user && <Route path="/signin" component={Signin}/> }
+          {!user && <Route path="/signup" component={Signup}/> }
+          <Route path="*">
+            <Redirect to="/"/>
+          </Route>
         </Switch>
       </div>
     </Router>

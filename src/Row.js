@@ -18,11 +18,10 @@ function Row(props) {
     const [YTUrl,setUrl] = useState("");
 
     function clickfunc(movie){
-        console.log(movie.name);
         if(YTUrl){
             setUrl("");
         }else{
-            movieTrailer("money heist")
+            movieTrailer(movie?.name || '')
                 .then(url => {
                     const vid = new URLSearchParams(new URL(url).search);
                     setUrl(vid.get('v'));
