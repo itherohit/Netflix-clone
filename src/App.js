@@ -7,6 +7,7 @@ import Signup from './Signup';
 import Browse from './Browser';
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import {auth} from './firebase';
 import { useDispatch } from "react-redux";
 import {login,logout} from './features/userSlice';
@@ -16,6 +17,14 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: '#e50914'
+    }
+  }
+});
 
 function App() {
   const user = useSelector(selectUser);
@@ -35,19 +44,21 @@ function App() {
     })
   },[]);
   return (
-    <Router>
-      <div className="App">
-        <Nav />
-        <Switch>
-          <Route exact path="/" component={!user ? Home : Browse}/>
-          {!user && <Route path="/signin" component={Signin}/> }
-          {!user && <Route path="/signup" component={Signup}/> }
-          <Route path="*">
-            <Redirect to="/"/>
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <MuiThemeProvider theme={theme}>
+      <Router>
+        <div className="App">
+          <Nav />
+          <Switch>
+            <Route exact path="/" component={!user ? Home : Browse}/>
+            {!user && <Route path="/signin" component={Signin}/> }
+            {!user && <Route path="/signup" component={Signup}/> }
+            <Route path="*">
+              <Redirect to="/"/>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </MuiThemeProvider>
   );
 }
 

@@ -25,14 +25,19 @@ function Nav() {
 
     return (
         <div className={`navbar ${scroll && "nav--bg"}`}>
-            <Link to="/">
-                <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" 
-                width="100px"
-                alt="Netflix"
-                className="navbar__img"
-                />
-            </Link>
+            <div className="navlinks">
+                <Link to="/">
+                    <img 
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" 
+                    width="100px"
+                    alt="Netflix"
+                    className="navbar__img"
+                    />
+                </Link>
+                {user && <Link to="/movies" className="navlinks__items">Movies</Link> }
+                {user && <Link to="/tvseries" className="navlinks__items">Tv Series</Link> }
+                {user && <Link to="/list" className="navlinks__items">My List</Link> }
+            </div>
             {!user ? <Link to="/signin" style={{ textDecoration: 'none' }}>
                         <button className="navbar__btn">Sign In</button>
                     </Link> :
