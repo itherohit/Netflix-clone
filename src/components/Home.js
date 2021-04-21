@@ -3,7 +3,7 @@ import Homecard from './Homecard';
 import QuestionCard from "./QuestionCard";
 import {Link} from 'react-router-dom'
 
-const questions = require("./question.json");
+const questions = require("../question.json");
 
 function Home() {
     const [email,setEmail] = useState("");

@@ -3,8 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import { useHistory,useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Button } from '@material-ui/core';
-import {login} from './features/userSlice';
-import {auth} from './firebase';
+import {login} from '../features/userSlice';
+import {auth} from '../Utils/firebase';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);

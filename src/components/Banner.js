@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
-import axios from './axios';
-import requests from './request.js';
+import axios from '../Utils/axios';
+import requests from '../Utils/request.js';
 import YouTube from 'react-youtube';
 const movieTrailer = require('movie-trailer');
 
@@ -22,6 +22,7 @@ function Banner() {
 
 
     const [YTUrl,setUrl] = useState("");
+    const [added,setAdd] = useState(false);
 
     function clickfunc(movie){
         console.log(movie);
@@ -36,6 +37,25 @@ function Banner() {
                 })
                 .catch(error=>console.log(error));
         }
+    }
+
+    function addfunc(movie){
+        let movies = []
+        if(localStorage.getItem('list')){
+            movies = JSON.parse(localStorage.getItem('list'));
+        }
+        let flag = 0;
+        for(let i=0; i<movies.length; i++){
+            if(movies[i].id == movie.id){
+                flag=1;
+                break;
+            }
+        }
+        if(!flag){
+            movies.push(movie);   
+        }
+        localStorage.setItem('list',JSON.stringify(movies));
+        setAdd(true);
     }
 
     const opts = {
@@ -60,7 +80,9 @@ function Banner() {
                 </h1>
                 <div className="banner__buttons">
                     <button onClick={() => clickfunc(movie)}>Play</button>
-                    <button>My List</button>
+                    <button onClick={() => addfunc(movie)} style={{
+                        cursor: "pointer"
+                    }}>{added ? "Added":"Add to List"}</button>
                 </div>
                 <p className="banner__description">{truncate(movie?.overview,150)}
                 </p>

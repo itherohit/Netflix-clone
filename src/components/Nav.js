@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { selectUser } from "./features/userSlice";
+import { selectUser } from "../features/userSlice";
 import { useDispatch } from "react-redux";
-import {logout} from './features/userSlice'
-import {auth} from './firebase';
+import {logout} from '../features/userSlice'
+import {auth} from '../Utils/firebase';
 
 function Nav() {
 

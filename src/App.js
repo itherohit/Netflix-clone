@@ -1,14 +1,17 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import Nav from './Nav';
-import Home from './Home';
-import Signin from './Signin';
-import Signup from './Signup';
-import Browse from './Browser';
+import Nav from './components/Nav';
+import Home from './components/Home';
+import Signin from './components/Signin';
+import Signup from './components/Signup';
+import Movies from './components/Movies';
+import Tvseries from './components/Tvseries';
+import List from './components/List';
+import Browse from './components/Browser';
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import {auth} from './firebase';
+import {auth} from './Utils/firebase';
 import { useDispatch } from "react-redux";
 import {login,logout} from './features/userSlice';
 import {
@@ -52,6 +55,9 @@ function App() {
             <Route exact path="/" component={!user ? Home : Browse}/>
             {!user && <Route path="/signin" component={Signin}/> }
             {!user && <Route path="/signup" component={Signup}/> }
+            {user && <Route path="/movies" component={Movies}/> }
+            {user && <Route path="/tvseries" component={Tvseries}/> }
+            {user && <Route path="/list" component={List}/> }
             <Route path="*">
               <Redirect to="/"/>
             </Route>

@@ -90,6 +90,50 @@ body {
   transform: scale(1.08);
 }
 
+.row__image {
+  position: relative;
+  transition: 500ms;
+}
+
+.row__overlay {
+  position: absolute;
+  opacity: 0;
+  color: white;
+  outline: none;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 500ms;
+  padding-top: 30px;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 0;
+  width: 100%;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    360deg,
+    rgba(0, 0, 0, 1) 45%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.row__image:hover .row__overlay {
+  opacity: 100%;
+}
+
+.row__image:hover .row__poster {
+  transform: scale(1.08);
+}
+
+.added {
+  color: gray;
+}
+
 .banner {
   height: 500px;
   display: flex;

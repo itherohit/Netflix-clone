@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import axios from './axios';
+import axios from '../Utils/axios';
 import YouTube from 'react-youtube';
 const movieTrailer = require('movie-trailer');
 
@@ -32,6 +32,24 @@ function Row(props) {
         }
     }
 
+    function addfunc(movie){
+        let movies = []
+        if(localStorage.getItem('list')){
+            movies = JSON.parse(localStorage.getItem('list'));
+        }
+        let flag = 0;
+        for(let i=0; i<movies.length; i++){
+            if(movies[i].id == movie.id){
+                flag=1;
+                break;
+            }
+        }
+        if(!flag){
+            movies.push(movie);   
+        }
+        localStorage.setItem('list',JSON.stringify(movies));
+    }
+
     const opts = {
         height: '390',
         width: '100%',
@@ -47,14 +65,17 @@ function Row(props) {
             <div className="row__posters">
                 {
                     movies.map(movie => {
-                    return <img 
+                    return <div className="row__image">
+                            <img 
                             key={movie.id}
                             onClick = {() => clickfunc(movie)}
                             className="row__poster"
                             src={`${baseurl}${props.isLarge ? movie?.poster_path : movie?.backdrop_path}`} 
                             alt={movie.name} 
                             width={`${props.isLarge ? "135px" : "225px"}`}
-                            />;
+                            />
+                            <button  onClick = {() => addfunc(movie)} className="row__overlay">Add to List</button>
+                            </div>;
                     })
                 }
             </div>
