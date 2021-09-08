@@ -27,37 +27,46 @@ export default function List() {
         localStorage.setItem('list',JSON.stringify(movies));
     }
 
-    return (
-        <div className="row-component" style={{
-            marginTop: "100px",
-            textAlign: "center",
-            fontSize: "1.5rem"
-        }}>
-            <h1>My List</h1>
-            
-            <div  className="row__posters" style={{
-                flexWrap: "wrap",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center"
+    if(movies.length > 0){
+        return (
+            <div className="row-component" style={{
+                marginTop: "100px",
+                textAlign: "center",
+                fontSize: "1.5rem"
             }}>
-                {
-                    movies.map(movie => {
-                    return  <div className="row__image">
-                            <img 
-                            key={movie.id}
-                            // onClick = {() => clickfunc(movie)}
-                            className="row__poster"
-                            src={`${baseurl}${movie?.poster_path}`} 
-                            alt={movie.name} 
-                            width="135px" 
-                            />
-                            <button onClick = {() => removefunc(movie)} className="row__overlay">Remove</button>
-                            
-                            </div>;
-                    })
-                }
+                <h1>My List</h1>
+                
+                <div  className="row__posters" style={{
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center"
+                }}>
+                    {
+                        movies.map(movie => {
+                        return  <div className="row__image">
+                                <img 
+                                key={movie.id}
+                                // onClick = {() => clickfunc(movie)}
+                                className="row__poster"
+                                src={`${baseurl}${movie?.poster_path}`} 
+                                alt={movie.name} 
+                                width="135px" 
+                                />
+                                <button onClick = {() => removefunc(movie)} className="row__overlay">Remove</button>
+                                
+                                </div>;
+                        })
+                    }
+                </div>
             </div>
-        </div>
-    )
+        )
+    }else{
+        return(
+            <div className="empty__list">
+                Nothing Here
+            </div>
+        )
+    }
+    
 }

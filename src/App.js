@@ -8,6 +8,7 @@ import Movies from './components/Movies';
 import Tvseries from './components/Tvseries';
 import List from './components/List';
 import Browse from './components/Browser';
+import Footer from './components/Footer';
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
@@ -62,6 +63,7 @@ function App() {
               <Redirect to="/"/>
             </Route>
           </Switch>
+          <Footer />
         </div>
       </Router>
     </MuiThemeProvider>
